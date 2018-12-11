@@ -4,10 +4,7 @@
 
 <head>
 
-
-  	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-
-
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
   	<script src="https://use.fontawesome.com/b38c8ed4c7.js"></script>
 
@@ -15,42 +12,17 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-
-          
 
 	<link rel="stylesheet" href="css/style.css">
 
 </head>
 
-
-
 <body>
+<header>
 
-	<header>
-
-		
-
-			<div >
-
-				
-
-				<ul class="right hide-on-med-and-down" id="head-nav-links">
-
-					<li><a href="/survey">Survey</a></li>
-
-					<li><a href="/api/friends">API Friends List</a></li>
-
-					<li><a href="https://github.com/angrbrd/friend-finder">GitHub Repo</a></li>
-
-				</ul>
-
-			</div>
-
-		
 
 	</header>
 
@@ -99,16 +71,13 @@
 						</div>
 
 
-
-						<!-- Survey Questions -->
-
 						<div class="input-field col s12">
 
 							<h3>Question 1</h3>
 
 							<h5>Your mind is always buzzing with unexplored ideas and plans.</h5>
 
-							<select id="question1">
+							<select class="chosen" id="question1">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -134,7 +103,7 @@
 
 							<h5>Generally speaking, you rely more on your experience than your imagination.</h5>
 
-							<select id="question2">
+							<select class= "chosen"  id="question2">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -160,7 +129,7 @@
 
 							<h5>You find it easy to stay relaxed and focused even when there is some pressure.</h5>
 
-							<select id="question3">
+							<select class= "chosen" id="question3">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -186,7 +155,7 @@
 
 							<h5>You rarely do something just out of sheer curiosity.</h5>
 
-							<select id="question4">
+							<select class= "chosen" id="question4">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -212,7 +181,7 @@
 
 							<h5>People can rarely upset you.</h5>
 
-							<select id="question5">
+							<select class= "chosen" id="question5">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -238,7 +207,7 @@
 
 							<h5>It is often difficult for you to relate to other people’s feelings.</h5>
 
-							<select id="question6">
+							<select class= "chosen" id="question6">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -264,7 +233,7 @@
 
 							<h5>In a discussion, truth should be more important than people’s sensitivities.</h5>
 
-							<select id="question7">
+							<select class= "chosen" id="question7">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -290,7 +259,7 @@
 
 							<h5>You rarely get carried away by fantasies and ideas.</h5>
 
-							<select id="question8">
+							<select class= "chosen" id="question8">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -316,7 +285,7 @@
 
 							<h5>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h5>
 
-							<select id="question9">
+							<select class= "chosen" id="question9">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -342,7 +311,7 @@
 
 							<h5>You feel more energetic after spending time with a group of people.</h5>
 
-							<select id="question10">
+							<select class="chosen"  id="question10">
 
 								<option value="" disabled selected>Choose your option</option>
 
@@ -384,51 +353,13 @@
 
 	</main>
 
+    <footer class="footer">
+            <div class="container">
+              <p><a href="/api/friends">Members List</a> | <a href="https://github.com/Jaydanasara/friendfinder">GitHub Repo</a></p>
+            </div>
+          </footer>
 
-
-	<footer>
-
-		<div class="container">
-
-			<div class="row">
-
-				<div class="col l6 s12">
-
-				
-				</div>
-
-				<div class="col l4 offset-l2 s12">
-
-					<h5 class="white-text">Links</h5>
-
-					<ul>
-
-						<li><a class="grey-text text-lighten-3" href="/api/friends">API Friends List</a></li>
-
-						<li><a class="grey-text text-lighten-3" href="https://github.com/angrbrd/friend-finder">GitHub Repo</a></li>
-
-					</ul>
-
-				</div>
-
-			</div>
-
-		</div>
-
-		<div>
-
-			<div class="container">
-
-
-			</div>
-
-		</div>
-
-	</footer>
-
-
-
-	<!-- Modal Dialog Displaying Closest Friend Match -->
+	
 
 	<div id="modal1" class="modal">
 
@@ -482,11 +413,29 @@
 
 		$('#submitButton').on('click', function(event) {
 
-			event.preventDefault();
+            event.preventDefault();
+            
+            function checkanswers() {
+                var correct=true;
+                $(".validate").each(function(){
+                    if ($(this).val() === "") {
+                        allfilled=false;
+                    }
+                });
+
+                $(".chosen").each(function(){
+                    if ($(this).val() === "") {
+                        correct = false;
+                    }
+                });
+                return correct
+            }
 
 
+            if (checkanswers()) {
 
-			var userInput = {
+            
+			var newfriend = {
 
 				name: $('#userName').val().trim(),
 
@@ -520,7 +469,7 @@
 
 
 
-			$.post('/api/friends', userInput)
+			$.post('/api/friends', newfriend)
 
       		.done(function(data) {
 
@@ -531,14 +480,20 @@
 		    	$("#userMatchImage").attr("src", data.matchImage);
 
 
-
-		    	// Pop open the modal dialog
-
       			$('#modal1').modal('open');
 
       		});
 
-		});
+    
+    } else {
+
+            alert("please complete all fields before submitting");
+
+    }
+
+});
+
+
 
 	</script>
 

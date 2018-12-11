@@ -26,7 +26,7 @@ app.post("/api/friends", function(req, res) {
 
 		var matchImage = '';
 
-		var Difference = 100; 
+		var Difference = 500; 
 
 		for (var i = 0; i < friends.length; i++) {
 
@@ -56,19 +56,12 @@ app.post("/api/friends", function(req, res) {
 
 		}
 
-		friends.push(userInput);
+		friends.push(newfriend);
 
 
-		res.json({ match: matchName, matchImage: matchImage});
+		res.json({ match: match, matchImage: matchImage});
 
 	});
 
-  
-
-  app.post("/api/clear", function(req, res) {
-    // Empty out the arrays of data
-    tableData.length = [];
-
-    res.json({ ok: true });
-  });
 };
+
